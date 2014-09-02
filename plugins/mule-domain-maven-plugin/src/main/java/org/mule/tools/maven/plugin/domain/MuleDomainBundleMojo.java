@@ -127,7 +127,7 @@ public class MuleDomainBundleMojo extends MuleDomainMojo
         try
         {
             muleArchiver.createArchive();
-            domainBundleTempDir.delete();
+            FileUtils.deleteDirectory(domainBundleTempDir);
         }
         catch (Exception e)
         {

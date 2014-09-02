@@ -20,11 +20,11 @@
     </properties>
 
     <dependencies>
-        <dependency>
+<!--        <dependency>
             <groupId>com.mulesoft.cloudhub</groupId>
             <artifactId>cloudhub-client-api</artifactId>
             <version>${cloudhub.client.version}</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>org.jfrog.maven.annomojo</groupId>

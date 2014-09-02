@@ -1,4 +1,4 @@
-Mule Application Kit
+Mule ESB Maven Tools
 ====================
 
 The Mule Application Kit allows the development of Mule application based on Maven tooling. This kit includes archetypes for building regular Mule applications.

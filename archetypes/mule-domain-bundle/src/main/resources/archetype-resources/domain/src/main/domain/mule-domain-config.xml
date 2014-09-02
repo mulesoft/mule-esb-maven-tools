@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain:mule-domain
+        xmlns="http://www.mulesoft.org/schema/mule/core"
+#if($EE == 'true')
+        xmlns:domain="http://www.mulesoft.org/schema/mule/ee/domain"
+#else
+        xmlns:domain="http://www.mulesoft.org/schema/mule/domain"
+#end
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:spring="http://www.springframework.org/schema/beans"
+        xsi:schemaLocation="
+            http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+#if($EE == 'true')
+            http://www.mulesoft.org/schema/mule/ee/domain http://www.mulesoft.org/schema/mule/ee/domain/current/mule-domain-ee.xsd">
+#else
+            http://www.mulesoft.org/schema/mule/domain http://www.mulesoft.org/schema/mule/domain/current/mule-domain.xsd">
+#end
+
+        <!-- configure here resource to be shared within the domain -->
+
+</domain:mule-domain>
+
+
+

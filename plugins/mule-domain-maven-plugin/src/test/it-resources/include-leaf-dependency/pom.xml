@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.mule</groupId>
+    <artifactId>include-leaf-dependency</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>mule</packaging>
+    <name>include-leaf-dependency</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.mule.transports</groupId>
+            <artifactId>mule-transport-http</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.mule.tools</groupId>
+                <artifactId>maven-mule-plugin</artifactId>
+                <version>${version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <inclusions>
+                        <inclusion>
+                            <groupId>commons-httpclient</groupId>
+                            <artifactId>commons-httpclient</artifactId>
+                        </inclusion>
+                    </inclusions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>${groupId}</groupId>
+        <artifactId>${rootArtifactId}</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>${groupId}.bundle</groupId>
+    <artifactId>${rootArtifactId}-domain</artifactId>
+    <packaging>mule-domain-bundle</packaging>
+    <version>${version}</version>
+    <name>Domain ${rootArtifactId} Bundle Project</name>
+
+    <build>
+        <plugins>
+            <plugin>
+                <!-- used to package the domain bundle artifact -->
+                <groupId>org.mule.tools.maven</groupId>
+                <artifactId>mule-domain-maven-plugin</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <copyToDomainsDirectory>true</copyToDomainsDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -29,46 +29,6 @@
 	</properties>
 
 	<build>
-		<!-- Use a newer version of the install plugin than what your Maven uses 
-			by default. The older version failed to install the project if there was 
-			no target/classes folder. Since we use mule packaging on the project we actually 
-			create and attach the zip that must be installed. -->
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-install-plugin</artifactId>
-					<version>2.3.1</version>
-				</plugin>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
-					only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.mule.tools.maven</groupId>
-										<artifactId>mule-app-maven-plugin</artifactId>
-										<versionRange>[3.3,)</versionRange>
-										<goals>
-											<goal>attach-test-resources</goal>
-											<goal>filter-resources</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 		<plugins>
 			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
@@ -85,21 +45,6 @@
 #end
 				</configuration>
 			</plugin>
-            <plugin>
-                <groupId>org.mule.tools</groupId>
-                <artifactId>studio-maven-plugin</artifactId>
-                <version>${mule.version}</version>
-            </plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
-				<configuration>
-					<source>${symbol_dollar}{jdk.version}</source>
-					<target>${symbol_dollar}{jdk.version}</target>
-					<encoding>ISO-8859-1</encoding>
-				</configuration>
-			</plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>2.2.1</version>
@@ -110,19 +55,9 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>${symbol_dollar}{eclipsePluginVersion}</version>
-				<configuration>
-					<!-- by default download all sources when generating project files -->
-					<downloadSources>true</downloadSources>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
 				<version>1.7</version>
-#if(${addAppToClasspath} == 'true')
 				<executions>
 					<execution>
 						<id>add-resource</id>
@@ -139,105 +74,9 @@
 						</configuration>
 					</execution>
 				</executions>
-#end
 			</plugin>
-			<plugin>
-		        <groupId>org.codehaus.mojo</groupId>
-		        <artifactId>exec-maven-plugin</artifactId>
-		        <version>1.2.1</version>
-		        <executions>
-		          <execution>
-		            <goals>
-		              <goal>java</goal>
-		            </goals>
-		          </execution>
-		        </executions>
-		        <configuration>
-		          <mainClass>org.mule.MuleServer</mainClass>
-		          <arguments>
-		            <argument>-config</argument>
-					<argument>src/main/app/mule-config.xml</argument>
-		          </arguments>
-		        <classpathScope>compile</classpathScope>
-		        </configuration>
-		      </plugin>
 		</plugins>
 	</build>
-
-	<!-- plugins for creating site reports -->
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>2.4.2</version>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>2.5</version>
-				<configuration>
-					<configLocation>http://mulesoft.org/download/attachments/92/checkstyle.xml?version=1</configLocation>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-pmd-plugin</artifactId>
-				<version>2.5</version>
-				<configuration>
-					<targetJdk>${symbol_dollar}{jdk.version}</targetJdk>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>2.5</version>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>taglist-maven-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<tags>
-						<tag>TODO</tag>
-						<tag>@todo</tag>
-						<tag>FIXME</tag>
-						<tag>@fixme</tag>
-						<tag>@deprecated</tag>
-					</tags>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jxr-plugin</artifactId>
-				<version>2.2</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.7</version>
-				<configuration>
-					<source>${symbol_dollar}{jdk.version}</source>
-					<links>
-						<link>http://java.sun.com/j2ee/1.4/docs/api</link>
-						<link>http://java.sun.com/j2se/1.4.2/docs/api</link>
-						<link>http://java.sun.com/j2se/1.5.0/docs/api</link>
-					</links>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>jdepend-maven-plugin</artifactId>
-				<version>2.0-beta-2</version>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>findbugs-maven-plugin</artifactId>
-				<version>2.3.2</version>
-			</plugin>
-		</plugins>
-	</reporting>
 
 	<!-- Mule Dependencies -->
 	<dependencies>
@@ -250,19 +89,15 @@
             <type>zip</type>
         </dependency>
 #end
-		<dependency>
-			<groupId>org.mule</groupId>
-			<artifactId>mule-core</artifactId>
-			<version>${symbol_dollar}{mule.version}</version>
-			<scope>provided</scope>
-		</dependency>
 		<!-- Xml configuration -->
+#if($EE == 'false')
 		<dependency>
 			<groupId>org.mule.modules</groupId>
 			<artifactId>mule-module-spring-config</artifactId>
 			<version>${symbol_dollar}{mule.version}</version>
 			<scope>provided</scope>
 		</dependency>
+#end
 #if($EE == 'true')
 		<dependency>
         	<groupId>com.mulesoft.muleesb</groupId>
@@ -313,18 +148,6 @@
 			<version>${symbol_dollar}{mule.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>mockobjects</groupId>
-			<artifactId>mockobjects-core</artifactId>
-			<version>0.09</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${symbol_dollar}{junit.version}</version>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
 
 	<repositories>
@@ -353,35 +176,4 @@
             <url>http://repository.codehaus.org/</url>
         </repository>
     </repositories>
-#if(${studioNature} == 'true')
-	<profiles>
-		<profile>
-			<id>mule</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-eclipse-plugin</artifactId>
-						<version>${eclipsePluginVersion}</version>
-						<configuration>
-							<!-- by default download all sources when generating project files -->
-							<downloadSources>true</downloadSources>
-							<classpathContainers>
-		                        <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER/${vmtype}/${jdkName}</classpathContainer>
-		                        <!-- MuleStudio nature parameters -->
-		                        <classpathContainer>MULE_RUNTIME</classpathContainer>
-							</classpathContainers>
-		                    <additionalProjectnatures>
-		                        <projectnature>org.mule.tooling.core.muleNature</projectnature>
-		                    </additionalProjectnatures>
-		                    <additionalBuildcommands>
-		                        <buildcommand>org.mule.tooling.core.muleBuilder</buildcommand>
-		                    </additionalBuildcommands>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
-#end
 </project>

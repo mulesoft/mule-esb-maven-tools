@@ -10,15 +10,14 @@ Creating a mule application using the mule archetype project is extremely easy. 
 
      mvn archetype:generate -DarchetypeGroupId=org.mule.tools.maven -DarchetypeArtifactId=maven-achetype-mule-app \
 	-DarchetypeVersion=1.0-SNAPSHOT -DgroupId=org.mule -DartifactId=mule-test-archetype -Dversion=1.0-SNAPSHOT \
-	-DmuleVersion=3.5.0 -Dpackage=org.mule -Dtransports=file,http,jdbc,jms,vm -Dmodules=client,cxf,management,scripting,sxc,xml \
-	-DstudioNature=false 
+	-DmuleVersion=3.5.0 -Dpackage=org.mule -Dtransports=file,http,jdbc,jms,vm -Dmodules=client,cxf,management,scripting,sxc,xml
 	
 In case you want your application to belong to a mule domain then you can add the domain specification parameters:
 
      mvn archetype:generate -DarchetypeGroupId=org.mule.tools.maven -DarchetypeArtifactId=maven-achetype-mule-app \
 	-DarchetypeVersion=1.0-SNAPSHOT -DgroupId=org.mule -DartifactId=mule-test-archetype -Dversion=1.0-SNAPSHOT \
 	-DmuleVersion=3.5.0 -Dpackage=org.mule -Dtransports=file,http,jdbc,jms,vm -Dmodules=client,cxf,management,scripting,sxc,xml \
-	-DstudioNature=false -DdomainGroupId=org.mule.domain -DdomainArtifactId=my-domain -DdomainVersion=1.0-SNAPSHOT
+	-DdomainGroupId=org.mule.domain -DdomainArtifactId=my-domain -DdomainVersion=1.0-SNAPSHOT
 
 Archetype Parameters:
 
@@ -31,10 +30,8 @@ Archetype Parameters:
 |artifactId|The artifact Id of the application you are creating. ||
 |version|The version of your application. Usually 1.0-SNAPSHOT.|1.0-SNAPSHOT|
 |muleVersion|The version of the mule runtime you are going to use. Mule 2.2.x is no longer supported|3.2.1|
-|addAppToClasspath|A flag to either add the src/main/app/ folder as a resource folder to easily access it within your IDE|false|
 |transports|A comma separated list of the transport you are going to use within your application.|file,http,jdbc,jms,vm |
 |modules|A comma separated list of the modules you are going to use within your application. |client,cxf,management,scripting,sxc,xml |
-|studioNature|A flag to enable studio nature, in the future will allow you to import the project to Studio |false |
 |EE|A flag to import the EE counterpart of the transports/modules you are using. |false |
 |domainGroupId|The group Id of the domain that applications belongs to. |empty |
 |domainArtifactId|The artifact Id of the domain that applications belongs to. |empty |

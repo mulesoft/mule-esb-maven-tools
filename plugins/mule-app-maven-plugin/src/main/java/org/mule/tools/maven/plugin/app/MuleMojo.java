@@ -10,7 +10,7 @@
 
 package org.mule.tools.maven.plugin.app;
 
-import org.mule.tools.artifact.archiver.MuleApplicationArchiveBuilder;
+import org.mule.tools.artifact.archiver.api.MuleApplicationArchiveBuilder;
 
 import java.io.File;
 import java.io.IOException;
@@ -147,10 +147,14 @@ public class MuleMojo extends AbstractMuleMojo
         if (filterAppDirectory)
         {
             muleApplicationArchiveBuilder.setAppResourceFolder(getFilteredAppDirectory());
+            final File[] files = getFilteredAppDirectory().listFiles();
+            muleApplicationArchiveBuilder.excludeFromClassesFolder(files);
         }
         else
         {
             muleApplicationArchiveBuilder.setAppResourceFolder(appDirectory);
+            final File[] files = appDirectory.listFiles();
+            muleApplicationArchiveBuilder.excludeFromClassesFolder(files);
         }
     }
 

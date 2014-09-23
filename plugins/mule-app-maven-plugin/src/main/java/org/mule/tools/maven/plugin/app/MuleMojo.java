@@ -10,6 +10,8 @@
 
 package org.mule.tools.maven.plugin.app;
 
+import org.mule.tools.artifact.archiver.MuleApplicationArchiveBuilder;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -31,6 +33,8 @@ import org.codehaus.plexus.archiver.jar.JarArchiver;
  */
 public class MuleMojo extends AbstractMuleMojo
 {
+    public final static String LIB_LOCATION = "lib" + File.separator;
+
     /**
      * @component
      */
@@ -85,12 +89,6 @@ public class MuleMojo extends AbstractMuleMojo
      */
     private boolean filterAppDirectory;
 
-    /**
-     * @parameter default-value="false"
-     * @since 1.8
-     */
-    private boolean prependGroupId;
-
     public void execute() throws MojoExecutionException, MojoFailureException
     {
         File app = getMuleAppZipFile();
@@ -110,17 +108,18 @@ public class MuleMojo extends AbstractMuleMojo
     {
         validateProject();
 
-        MuleArchiver archiver = new MuleArchiver(prependGroupId);
-        addAppDirectory(archiver);
-        addCompiledClasses(archiver);
-        addDependencies(archiver);
-        addMappingsDirectory(archiver);
-        archiver.setDestFile(app);
+        final MuleApplicationArchiveBuilder muleApplicationArchiveBuilder = new MuleApplicationArchiveBuilder();
+
+        addAppDirectory(muleApplicationArchiveBuilder);
+        addCompiledClasses(muleApplicationArchiveBuilder);
+        addDependencies(muleApplicationArchiveBuilder);
+        addMappingsDirectory(muleApplicationArchiveBuilder);
+        muleApplicationArchiveBuilder.setDestinationFile(app);
 
         try
         {
             app.delete();
-            archiver.createArchive();
+            muleApplicationArchiveBuilder.createDeployableFile();
         }
         catch (IOException e)
         {
@@ -143,49 +142,49 @@ public class MuleMojo extends AbstractMuleMojo
         }
     }
 
-    private void addAppDirectory(MuleArchiver archiver) throws ArchiverException
+    private void addAppDirectory(MuleApplicationArchiveBuilder muleApplicationArchiveBuilder) throws ArchiverException
     {
         if (filterAppDirectory)
         {
-            archiver.addResources(getFilteredAppDirectory());
+            muleApplicationArchiveBuilder.setAppResourceFolder(getFilteredAppDirectory());
         }
         else
         {
-            archiver.addResources(appDirectory);
+            muleApplicationArchiveBuilder.setAppResourceFolder(appDirectory);
         }
     }
 
-    private void addCompiledClasses(MuleArchiver archiver) throws ArchiverException, MojoExecutionException
+    private void addCompiledClasses(MuleApplicationArchiveBuilder muleApplicationArchiveBuilder) throws ArchiverException, MojoExecutionException
     {
         if (this.archiveClasses == false)
         {
-            addClassesFolder(archiver);
+            addClassesFolder(muleApplicationArchiveBuilder);
         }
         else
         {
-            addArchivedClasses(archiver);
+            addArchivedClasses(muleApplicationArchiveBuilder);
         }
     }
 
-    private void addClassesFolder(MuleArchiver archiver) throws ArchiverException
+    private void addClassesFolder(MuleApplicationArchiveBuilder muleApplicationArchiveBuilder) throws ArchiverException
     {
         if (this.classesDirectory.exists())
         {
             getLog().info("Copying classes directly");
-            archiver.addClasses(this.classesDirectory, null, null);
+            muleApplicationArchiveBuilder.addClassesFolder(this.classesDirectory);
         }
         else
         {
             getLog().info(this.classesDirectory + " does not exist, skipping");
         }
     }
-    
-    private void addMappingsDirectory(MuleArchiver archiver) throws ArchiverException
+
+    private void addMappingsDirectory(MuleApplicationArchiveBuilder muleApplicationArchiveBuilder) throws ArchiverException
     {
         if (this.mappingsDirectory.exists())
         {
             getLog().info("Copying mappings");
-            archiver.addResources(this.mappingsDirectory);
+            muleApplicationArchiveBuilder.addResourcesFolder(this.mappingsDirectory);
         }
         else
         {
@@ -193,7 +192,7 @@ public class MuleMojo extends AbstractMuleMojo
         }
     }
 
-    private void addArchivedClasses(MuleArchiver archiver) throws ArchiverException, MojoExecutionException
+    private void addArchivedClasses(MuleApplicationArchiveBuilder muleApplicationArchiveBuilder) throws ArchiverException, MojoExecutionException
     {
         if (this.classesDirectory.exists() == false)
         {
@@ -210,7 +209,7 @@ public class MuleMojo extends AbstractMuleMojo
         try
         {
             jarArchiver.createArchive();
-            archiver.addLib(jar);
+            muleApplicationArchiveBuilder.addJarLibrary(jar);
         }
         catch (IOException e)
         {
@@ -220,14 +219,13 @@ public class MuleMojo extends AbstractMuleMojo
         }
     }
 
-    private void addDependencies(MuleArchiver archiver) throws ArchiverException
+    private void addDependencies(MuleApplicationArchiveBuilder muleApplicationArchiveBuilder) throws ArchiverException
     {
         for (Artifact artifact : getArtifactsToArchive())
         {
             String message = String.format("Adding <%1s> as a lib", artifact.getId());
             getLog().info(message);
-
-            archiver.addLibraryArtifact(artifact);
+            muleApplicationArchiveBuilder.addJarLibrary(artifact.getFile());
         }
     }
 

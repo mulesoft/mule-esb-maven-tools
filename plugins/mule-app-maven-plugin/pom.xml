@@ -46,6 +46,10 @@
             <artifactId>slf4j-simple</artifactId>
             <version>1.6.6</version>
         </dependency>
+        <dependency>
+            <groupId>mule-artifact-archiver</groupId>
+            <artifactId>mule-artifact-archiver</artifactId>
+        </dependency>
 
         <!-- Test -->
         <dependency>

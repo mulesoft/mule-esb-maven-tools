@@ -12,6 +12,15 @@ where necessary.  Here is an overview of what was created.
 
 A maven project descriptor that describes how to build this project.
 
+.src/main/app/mule-config.xml
+
+A basic configuration to get you started.
+
+.src/main/app/mule-deploy.properties
+
+A basic deployment descriptor that controls how the application should be deployed.
+Here you can specify things like the encoding to use, or which domain the app belongs to.
+For more information see: http://www.mulesoft.org/documentation/display/current/Deployment+Descriptor
 
 TESTING
 =======
@@ -19,15 +28,21 @@ TESTING
 This project also contains test classes that can be run as part of a test suite.
 
 -----------------------------------------------------------------
-./src/test/java/${packageInPathFormat}/FunctionalTestCase.java
+./src/test/java/${packageInPathFormat}/ExampleFunctionalTestCase.java
 
 This is an example functional test case.  The test will work as is, but you
-need to configure it to actually test your code.  For more information about
-testing see: http://www.mulesoft.org/documentation/display/current/Functional+Testing.
+need to configure it to actually test your code.
+#if(${domainGroupId} != 'empty')
+Also, the test assumes the domain configuration file is name 'mule-domain-config.xml'. So you should modify it accordingly if not.
+This file is added to the test resources by maven, so you should run 'mvn compile' before attempting to run it through an IDE.
+#end
 
+For more information about
+testing see: http://www.mulesoft.org/documentation/display/current/Functional+Testing.
 
 ADDITIONAL RESOURCES
 ====================
+
 Everything you need to know about getting started with Mule can be found here:
 http://www.mulesoft.org/documentation/display/current/Home
 

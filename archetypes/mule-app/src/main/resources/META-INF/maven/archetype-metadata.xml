@@ -6,16 +6,16 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<requiredProperties>
 		<requiredProperty key="transports">
-			<defaultValue>file,http,jms,vm</defaultValue>
+			<defaultValue>http,jms,vm,file,ftp</defaultValue>
 		</requiredProperty>
 		<requiredProperty key="modules">
-			<defaultValue>cxf,scripting,xml</defaultValue>
+			<defaultValue>db,xml,jersey,json,ws</defaultValue>
 		</requiredProperty>
 		<requiredProperty key="muleVersion">
 			<defaultValue>3.5.0</defaultValue>
 		</requiredProperty>
 		<requiredProperty key="EE">
-			<defaultValue>false</defaultValue>
+			<defaultValue>true</defaultValue>
 		</requiredProperty>
         <requiredProperty key="domainGroupId">
             <defaultValue>empty</defaultValue>
@@ -30,10 +30,6 @@
 	<fileSets>
 		<fileSet filtered="true" packaged="true" encoding="UTF-8">
 			<directory>src/main/java</directory>
-			<includes>
-				<include>**/*.java</include>
-				<include>**/*.html</include>
-			</includes>
 		</fileSet>
 		<fileSet filtered="true" encoding="UTF-8">
 			<directory>src/main/app</directory>
@@ -50,19 +46,14 @@
 		</fileSet>
 		<fileSet filtered="true" encoding="UTF-8">
 			<directory>src/test/resources</directory>
-			<includes>
-				<include>**/*.xml</include>
-				<include>**/log4j.properties</include>
-			</includes>
 		</fileSet>
 		<fileSet filtered="true" encoding="UTF-8">
 			<directory>src/main/resources</directory>
 		</fileSet>
-
 		<fileSet filtered="true" encoding="UTF-8">
 			<directory></directory>
 			<includes>
-				<include>MULE-README.txt</include>
+				<include>README.txt</include>
 			</includes>
 		</fileSet>
 	</fileSets>

@@ -5,7 +5,7 @@
                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <requiredProperties>
         <requiredProperty key="EE">
-            <defaultValue>false</defaultValue>
+            <defaultValue>true</defaultValue>
         </requiredProperty>
     </requiredProperties>
     <fileSets>

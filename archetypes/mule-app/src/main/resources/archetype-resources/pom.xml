@@ -13,15 +13,11 @@
     <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
 		<mule.version>${muleVersion}</mule.version>
         <mule.tools.version>@project.version@</mule.tools.version>
-		<eclipsePluginVersion>2.8</eclipsePluginVersion>
-		<vmtype>org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType</vmtype>
-		<jdkName>JavaSE-1.6</jdkName>
-		<jdk.version>1.6</jdk.version>
+		<jdk.version>1.7</jdk.version>
 		<junit.version>4.9</junit.version>
-#if(${domainGroupId})
+#if(${domainGroupId} != 'empty')
         <domainGroupId>${domainGroupId}</domainGroupId>
         <domainArtifactId>${domainArtifactId}</domainArtifactId>
         <domainVersion>${domainVersion}</domainVersion>
@@ -46,15 +42,6 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.2.1</version>
-				<configuration>
-					<descriptorRefs>
-						<descriptorRef>project</descriptorRef>
-					</descriptorRefs>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
 				<version>1.7</version>
@@ -75,6 +62,28 @@
 					</execution>
 				</executions>
 			</plugin>
+#if(${domainGroupId} != 'empty')
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack-domain-config</id>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
+                            <includeArtifacIds>${symbol_dollar}{domainArtifactId}</includeArtifacIds>
+                            <includeGroupIds>${symbol_dollar}{domainGroupId}</includeGroupIds>
+                            <excludes>**\/*.properties</excludes>
+                            <excludeTransitive>true</excludeTransitive>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+#end
 		</plugins>
 	</build>
 
@@ -115,6 +124,16 @@
 #end
 		<!-- Mule Transports -->
 #foreach($transport in $transports.split(","))
+#if($transport == 'wmq' || $transport == 'msmq')
+#if(${EE} == 'true')
+        <dependency>
+            <groupId>com.mulesoft.muleesb.transports</groupId>
+            <artifactId>mule-transport-${transport}-ee</artifactId>
+            <version>${symbol_dollar}{mule.version}</version>
+            <scope>provided</scope>
+        </dependency>
+#end
+#else
 		<dependency>
 			<groupId>org.mule.transports</groupId>
 			<artifactId>mule-transport-${transport}</artifactId>
@@ -129,6 +148,7 @@
 			<version>${symbol_dollar}{mule.version}</version>
 			<scope>provided</scope>
 		</dependency>
+#end
 #end
 #end
 #end<!-- Mule Modules -->
@@ -152,28 +172,16 @@
 
 	<repositories>
 		<repository>
-			<id>jboss</id>
-			<name>JBoss</name>
-			<url>http://repository.jboss.com/</url>
-		</repository>
-		<repository>
 			<id>mulesoft-releases</id>
 			<name>MuleSoft Releases</name>
-			<url>http://repository.mulesoft.org/releases/</url>
+			<url>https://repository.mulesoft.org/nexus/content/repositories/public</url>
 		</repository>
-		<repository>
-			<id>oss-sonatype-snapshots</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-		</repository>
-		<repository>
-			<id>codehaus-snaphosts</id>
-			<name>Codehaus Snapshots</name>
-			<url>http://snapshots.repository.codehaus.org/</url>
-		</repository>
-        <repository>
-            <id>codehaus-releases</id>
-            <name>CodeHaus Releases</name>
-            <url>http://repository.codehaus.org/</url>
-        </repository>
     </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>mule-public</id>
+            <name>MuleSoft Releases</name>
+            <url>https://repository.mulesoft.org/nexus/content/repositories/public</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>

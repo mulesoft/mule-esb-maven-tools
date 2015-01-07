@@ -17,7 +17,7 @@
                http://www.mulesoft.org/schema/mule/domain http://www.mulesoft.org/schema/mule/domain/current/mule-domain.xsd">
 #end
 
-    <!-- configure here resource to be shared within the domain -->
+    <!-- configure here resources to be shared within the domain -->
 
 </domain:mule-domain>
 

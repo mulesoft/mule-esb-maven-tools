@@ -27,13 +27,13 @@ import org.codehaus.plexus.util.IOUtil;
 public class MuleDomainInstallMojo extends AbstractMuleMojo
 {
     /**
-     * If set to <code>true</code> attempt to copy the Mule application zip to $MULE_HOME/apps
+     * If set to <code>true</code> attempt to copy the Mule application zip to mule.home/apps or $MULE_HOME/apps
      *
      * @parameter alias="copyToDomainsDirectory" expression="${copyToDomainsDirectory}" default-value="false"
      * @required
      */
     protected boolean copyToDomainsDirectory;
-    
+
     public void execute() throws MojoExecutionException, MojoFailureException
     {
         if (copyToDomainsDirectory || Boolean.getBoolean("mule.domain.copyToDomainsDirectory"))
@@ -79,12 +79,11 @@ public class MuleDomainInstallMojo extends AbstractMuleMojo
 
     private String getMuleHomeEnvVarOrSystemProperty()
     {
-        String muleHome = System.getenv("MULE_HOME");
+        String muleHome = System.getProperty("mule.home");
         if (muleHome == null)
         {
-            // fall back to a system property which is set from the plugin testing framework
-            // when invoking the integration tests
-            muleHome = System.getProperty("mule.home");
+            // fall back to enviroment property $MULE_HOME
+            muleHome = System.getenv("MULE_HOME");
         }
         return muleHome;
     }

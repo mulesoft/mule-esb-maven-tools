@@ -48,13 +48,13 @@ Creating a Mule Application
 Creating a mule application using the mule archetype project is extremely easy. Just invoke it as follows:
 
      mvn archetype:generate -DarchetypeGroupId=org.mule.tools.maven -DarchetypeArtifactId=maven-achetype-mule-app \
-	-DarchetypeVersion=1.0-SNAPSHOT -DgroupId=org.mycompany.app -DartifactId=mule-app -Dversion=1.0-SNAPSHOT \
+	-DarchetypeVersion=1.1-SNAPSHOT -DgroupId=org.mycompany.app -DartifactId=mule-app -Dversion=1.0-SNAPSHOT \
 	-DmuleVersion=3.5.0 -Dpackage=org.mycompany.app -Dtransports=http,jms,vm,file,ftp -Dmodules=db,xml,jersey,json,ws
 	
 In case you want your application to belong to a mule domain then you can add the domain specification parameters:
 
      mvn archetype:generate -DarchetypeGroupId=org.mule.tools.maven -DarchetypeArtifactId=maven-achetype-mule-app \
-	-DarchetypeVersion=1.0-SNAPSHOT -DgroupId=org.mycompany.app -DartifactId=mule-app -Dversion=1.0-SNAPSHOT \
+	-DarchetypeVersion=1.1-SNAPSHOT -DgroupId=org.mycompany.app -DartifactId=mule-app -Dversion=1.0-SNAPSHOT \
 	-DmuleVersion=3.5.0 -Dpackage=org.mycompany.app -Dtransports=http,jms,vm,file,ftp -Dmodules=db,xml,jersey,json,ws \
 	-DdomainGroupId=org.mycompany.domain -DdomainArtifactId=mule-domain -DdomainVersion=1.0-SNAPSHOT
 
@@ -84,7 +84,7 @@ A mule application can belong to a domain group. The domain allows sharing of re
 To create a domain execute:
 
      mvn archetype:generate -DarchetypeGroupId=org.mule.tools.maven -DarchetypeArtifactId=maven-achetype-mule-domain \
-	-DarchetypeVersion=1.0-SNAPSHOT -DgroupId=org.mycompany.domain -DartifactId=mule-domain -Dversion=1.0-SNAPSHOT \
+	-DarchetypeVersion=1.1-SNAPSHOT -DgroupId=org.mycompany.domain -DartifactId=mule-domain -Dversion=1.0-SNAPSHOT \
 	-Dpackage=org.mycompany.domain -DEE=true
 
 Archetype Parameters:
@@ -109,7 +109,7 @@ the domain in a single project.
 To create a maven project with the domain and all the applications that will be deployed using that domain you can use the mule domain bundle archetype:
 
      mvn archetype:generate -DarchetypeGroupId=org.mule.tools.maven -DarchetypeArtifactId=maven-achetype-mule-domain-bundle \
-	-DarchetypeVersion=1.0-SNAPSHOT -DgroupId=com.mycompany -DartifactId=mule-project -Dversion=1.0-SNAPSHOT \
+	-DarchetypeVersion=1.1-SNAPSHOT -DgroupId=com.mycompany -DartifactId=mule-project -Dversion=1.0-SNAPSHOT \
 	-Dpackage=com.mycompany -DEE=false
 
 This command will create a maven multi-module project with the following modules:

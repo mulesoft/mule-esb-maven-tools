@@ -85,7 +85,7 @@ To create a domain execute:
 
      mvn archetype:generate -DarchetypeGroupId=org.mule.tools.maven -DarchetypeArtifactId=maven-achetype-mule-domain \
 	-DarchetypeVersion=1.1-SNAPSHOT -DgroupId=org.mycompany.domain -DartifactId=mule-domain -Dversion=1.0-SNAPSHOT \
-	-Dpackage=org.mycompany.domain -DEE=true
+	-Dpackage=org.mycompany.domain
 
 Archetype Parameters:
 
@@ -110,12 +110,19 @@ To create a maven project with the domain and all the applications that will be 
 
      mvn archetype:generate -DarchetypeGroupId=org.mule.tools.maven -DarchetypeArtifactId=maven-achetype-mule-domain-bundle \
 	-DarchetypeVersion=1.1-SNAPSHOT -DgroupId=com.mycompany -DartifactId=mule-project -Dversion=1.0-SNAPSHOT \
-	-Dpackage=com.mycompany -DEE=false
+	-Dpackage=com.mycompany
 
 This command will create a maven multi-module project with the following modules:
  - domain: This project is exactly as any project created with mule domain archetype. The artifact id for this project is ${artifactId}-domain. In this case would be mule-api-domain.
  - apps: This project is a bundle project for the mule applications that belong to this domain. Create here the mule applications using the mule applications archetype.
  - domain-bundle: This project is creates a bundle artifact with the domain plus the applications. This bundle project can be deployed as any domain and will also deploy the domain applications.
+
+ If you're using the EE distribution, you should add the EE flag:
+
+     mvn archetype:generate -DarchetypeGroupId=org.mule.tools.maven -DarchetypeArtifactId=maven-achetype-mule-domain-bundle \
+	-DarchetypeVersion=1.1-SNAPSHOT -DgroupId=com.mycompany -DartifactId=mule-project -Dversion=1.0-SNAPSHOT \
+	-Dpackage=com.mycompany -DEE=true
+
 
  |parameter|description|default|
  |:--------|:----------|:----------|

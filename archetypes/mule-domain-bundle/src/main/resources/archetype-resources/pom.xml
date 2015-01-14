@@ -29,4 +29,11 @@
         <module>domain-bundle</module>
     </modules>
 
+    <pluginRepositories>
+        <pluginRepository>
+            <id>mule-releases</id>
+            <name>Mule Releases</name>
+            <url>https://repository.mulesoft.org/nexus/content/repositories/public</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>

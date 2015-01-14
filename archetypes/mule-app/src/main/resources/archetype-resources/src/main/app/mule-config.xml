@@ -13,10 +13,16 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xmlns:spring="http://www.springframework.org/schema/beans"
 #foreach($transport in $transports.split(','))
+#if($transport == 'wmq' || $transport == 'msmq')
+#if($EE == 'true')
+      xmlns:${transport}-ee="http://www.mulesoft.org/schema/mule/ee/${transport}"
+#end
+#else
       xmlns:${transport}="http://www.mulesoft.org/schema/mule/${transport}"
 #if($transport == 'ftp' || $transport == 'jdbc' ||$transport == 'jms' )
 #if($EE == 'true')
 	xmlns:${transport}-ee="http://www.mulesoft.org/schema/mule/ee/${transport}"
+#end
 #end
 #end
 #end
@@ -41,10 +47,16 @@
 		http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/core/${schemaVersion}/mule-ee.xsd
 #end
 #foreach($transport in $transports.split(','))
+#if($transport == 'wmq' || $transport == 'msmq')
+#if($EE == 'true')
+        http://www.mulesoft.org/schema/mule/ee/${transport} http://www.mulesoft.org/schema/mule/ee/${transport}/${schemaVersion}/mule-${transport}-ee.xsd
+#end
+#else
 		http://www.mulesoft.org/schema/mule/${transport} http://www.mulesoft.org/schema/mule/${transport}/${schemaVersion}/mule-${transport}.xsd
 #if($EE == 'true')
 #if($transport == 'ftp' || $transport == 'jdbc' || $transport == 'jms' )
 		http://www.mulesoft.org/schema/mule/ee/${transport} http://www.mulesoft.org/schema/mule/ee/${transport}/${schemaVersion}/mule-${transport}-ee.xsd
+#end
 #end
 #end
 #end

@@ -37,10 +37,6 @@
             </roles>
         </developer>
         <developer>
-            <id>pabad</id>
-            <name>Pablo Abad</name>
-        </developer>
-        <developer>
             <id>dfeist</id>
             <name>Daniel Feist</name>
         </developer>

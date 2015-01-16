@@ -32,7 +32,10 @@ This project also contains test classes that can be run as part of a test suite.
 
 This is an example functional test case.  The test will work as is, but you
 need to configure it to actually test your code.
-
+#if(${domainGroupId} != 'empty' && $muleVersion.matches("(3.5.[^0|1|2]*|3.6.[^0]*|3.7.*)"))
+Also, the test assumes the domain configuration file is name 'mule-domain-config.xml'. So you should modify it accordingly if it's not.
+This file is added to the test resources by maven, so you should run 'mvn compile' before attempting to run it through an IDE.
+#end
 For more information about
 testing see: http://www.mulesoft.org/documentation/display/current/Functional+Testing.
 

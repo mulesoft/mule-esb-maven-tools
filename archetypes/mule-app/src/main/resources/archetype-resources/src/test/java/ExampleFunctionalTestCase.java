@@ -25,6 +25,15 @@ public class ExampleFunctionalTestCase extends FunctionalTestCase
         return "mule-config.xml";
     }
 
+#if(${domainGroupId} != 'empty' && $muleVersion.matches("(3.5.[^0|1|2]*|3.6.[^0]*|3.7.*)"))
+    @Override
+    protected String getDomainConfig()
+    {
+        //TODO Rename accordingly if needed.
+        return "mule-domain-config.xml";
+    }
+
+#end
     @Test
     public void testConfiguration() throws Exception
     {

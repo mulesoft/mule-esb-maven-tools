@@ -14,18 +14,14 @@ import org.junit.Test;
 import org.mule.DefaultMuleMessage;
 import org.mule.api.MuleMessage;
 import org.mule.api.client.MuleClient;
-import org.mule.tck.junit4.FunctionalTestCase;
 import org.mule.transport.NullPayload;
+#if(${domainGroupId} != 'empty')
+import org.mule.tck.junit4.DomainFunctionalTestCase;
 
-public class ExampleFunctionalTestCase extends FunctionalTestCase
+public class ExampleFunctionalTestCase extends DomainFunctionalTestCase
 {
-    @Override
-    protected String getConfigFile()
-    {
-        return "mule-config.xml";
-    }
+    private static final int RECEIVE_TIMEOUT = 5000;
 
-#if(${domainGroupId} != 'empty' && $muleVersion.matches("(3.5.[^0|1|2]*|3.6.[^0]*|3.7.*)"))
     @Override
     protected String getDomainConfig()
     {
@@ -33,12 +29,37 @@ public class ExampleFunctionalTestCase extends FunctionalTestCase
         return "mule-domain-config.xml";
     }
 
+    @Override
+    public ApplicationConfig[] getConfigResources()
+    {
+        return new ApplicationConfig[] {
+                new ApplicationConfig("myApp", new String[] {"src/main/app/mule-config.xml"})
+        };
+    }
+#else
+import org.mule.tck.junit4.FunctionalTestCase;
+
+public class ExampleFunctionalTestCase extends FunctionalTestCase
+{
+    private static final int RECEIVE_TIMEOUT = 5000;
+
+    @Override
+    protected String getConfigFile()
+    {
+        return "src/main/app/mule-config.xml";
+    }
 #end
+
     @Test
     public void testConfiguration() throws Exception
     {
+#if(${domainGroupId} != 'empty')
+        MuleClient client = getMuleContextForApp("myApp").getClient();
+        MuleMessage message = new DefaultMuleMessage("some data", getMuleContextForApp("myApp"));
+#else
     	MuleClient client = muleContext.getClient();
         MuleMessage message = new DefaultMuleMessage("some data", muleContext);
+#end
         client.dispatch("vm://in", message);
         MuleMessage result = client.request("vm://out", RECEIVE_TIMEOUT);
         assertNotNull(result);

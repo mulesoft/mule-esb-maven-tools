@@ -62,7 +62,7 @@
 					</execution>
 				</executions>
 			</plugin>
-#if(${domainGroupId} != 'empty' && $muleVersion.matches("(3.5.[^0|1|2]*|3.6.[^0]*|3.7.*)"))
+#if(${domainGroupId} != 'empty')
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>

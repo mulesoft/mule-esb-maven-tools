@@ -12,7 +12,7 @@
             <plugin>
                 <groupId>org.mule.tools.maven</groupId>
                 <artifactId>mule-domain-maven-plugin</artifactId>
-                <version>1.1-SNAPSHOT</version>
+                <version>1.1</version>
                 <extensions>true</extensions>
                 <configuration>
                     <!-- if MULE_HOME variable is configured then the domain will be copy to domains directory of your mule installation -->

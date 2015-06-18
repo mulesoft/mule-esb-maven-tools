@@ -120,7 +120,7 @@ This command will create a maven multi-module project with the following modules
  If you're using the EE distribution, you should add the EE flag:
 
      mvn archetype:generate -DarchetypeGroupId=org.mule.tools.maven -DarchetypeArtifactId=maven-achetype-mule-domain-bundle \
-	-DarchetypeVersion=1.1-SNAPSHOT -DgroupId=com.mycompany -DartifactId=mule-project -Dversion=1.0-SNAPSHOT \
+	-DarchetypeVersion=1.1 -DgroupId=com.mycompany -DartifactId=mule-project -Dversion=1.0-SNAPSHOT \
 	-Dpackage=com.mycompany -DEE=true
 
 

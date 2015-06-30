@@ -11,20 +11,17 @@ where necessary.  Here is an overview of what was created.
 
 ./pom.xml:
 
-A maven project descriptor that describes how to build this project.  If you
-enabled this project for the MuleForge, this file will contain additional
-information about the project on MuleForge.
+A maven project descriptor that describes how to build this project.
 
-
-.src/main/app/mule-config.xml
+.src/main/app/mule-config.xml:
 
 A basic configuration to get you started.
 
-.src/main/app/mule-deploy.properties
+.src/main/app/mule-deploy.properties:
 
 A basic deployment descriptor that controls how the application should be deployed.
 Here you can specify things like the encoding to use, or which domain the app belongs to.
-For more information see: http://www.mulesoft.org/documentation/display/current/Deployment+Descriptor
+For more information see: https://developer.mulesoft.com/docs/display/current/Mule+Application+Deployment+Descriptor
 
 TESTING
 =======
@@ -41,22 +38,22 @@ Also, the test assumes the domain configuration file is name 'mule-domain-config
 This file is added to the test resources by maven, so you should run 'mvn compile' before attempting to run it through an IDE.
 #end
 For more information about
-testing see: http://www.mulesoft.org/documentation/display/current/Functional+Testing.
+testing see: https://developer.mulesoft.com/docs/display/current/Functional+Testing.
 
 ADDITIONAL RESOURCES
 ====================
 
 Everything you need to know about getting started with Mule can be found here:
-http://www.mulesoft.org/documentation/display/current/Home
+https://developer.mulesoft.com/docs/display/current/Home
 
-For information about working with Mule Studio which is the Mule IDE can be found here:
-http://www.mulesoft.org/documentation/display/current/Anypoint+Studio+Essentials
+For information about working with Anypoint Studio which is the Mule IDE can be found here:
+https://developer.mulesoft.com/docs/display/current/Anypoint+Studio+Essentials
 
 Remember if you get stuck you can try getting help on the Mule forum:
 http://forum.mulesoft.org/mulesoft
 
 Also, MuleSoft, the company behind Mule, offers 24x7 support options:
-http://www.mulesoft.com/support-and-services/enterprise-subscriptions-support
+https://www.mulesoft.com/support-and-services/mule-esb-support-license-subscription
 
 Enjoy your Mule ride!
 

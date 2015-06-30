@@ -13,19 +13,12 @@
     <name>Mule ESB Maven App Plugin</name>
 
     <properties>
-        <cloudhub.client.version>1.6</cloudhub.client.version>
         <license.path>../../LICENSE_HEADER</license.path>
         <maven.plugin.version>2.6</maven.plugin.version>
         <maven.plugin.tools.anno.version>1.4.0</maven.plugin.tools.anno.version>
     </properties>
 
     <dependencies>
-<!--        <dependency>
-            <groupId>com.mulesoft.cloudhub</groupId>
-            <artifactId>cloudhub-client-api</artifactId>
-            <version>${cloudhub.client.version}</version>
-        </dependency>-->
-
         <dependency>
             <groupId>org.jfrog.maven.annomojo</groupId>
             <artifactId>maven-plugin-tools-anno</artifactId>

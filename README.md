@@ -47,15 +47,15 @@ Creating a Mule Application
 
 Creating a mule application using the mule archetype project is extremely easy. Just invoke it as follows:
 
-     mvn archetype:generate -DarchetypeGroupId=org.mule.tools.maven -DarchetypeArtifactId=maven-achetype-mule-app \
-	-DarchetypeVersion=1.0 -DgroupId=org.mycompany.app -DartifactId=mule-app -Dversion=1.0-SNAPSHOT \
-	-DmuleVersion=3.5.0 -Dpackage=org.mycompany.app -Dtransports=http,jms,vm,file,ftp -Dmodules=db,xml,jersey,json,ws
+     mvn archetype:generate -DarchetypeGroupId=org.mule.tools.maven -DarchetypeArtifactId=maven-archetype-mule-app \
+	-DarchetypeVersion=1.1 -DgroupId=org.mycompany.app -DartifactId=mule-app -Dversion=1.0-SNAPSHOT \
+	-DmuleVersion=3.7.0 -Dpackage=org.mycompany.app -Dtransports=http,jms,vm,file,ftp -Dmodules=db,xml,jersey,json,ws
 	
 In case you want your application to belong to a mule domain then you can add the domain specification parameters:
 
-     mvn archetype:generate -DarchetypeGroupId=org.mule.tools.maven -DarchetypeArtifactId=maven-achetype-mule-app \
-	-DarchetypeVersion=1.0 -DgroupId=org.mycompany.app -DartifactId=mule-app -Dversion=1.0-SNAPSHOT \
-	-DmuleVersion=3.5.0 -Dpackage=org.mycompany.app -Dtransports=http,jms,vm,file,ftp -Dmodules=db,xml,jersey,json,ws \
+     mvn archetype:generate -DarchetypeGroupId=org.mule.tools.maven -DarchetypeArtifactId=maven-archetype-mule-app \
+	-DarchetypeVersion=1.1 -DgroupId=org.mycompany.app -DartifactId=mule-app -Dversion=1.0-SNAPSHOT \
+	-DmuleVersion=3.7.0 -Dpackage=org.mycompany.app -Dtransports=http,jms,vm,file,ftp -Dmodules=db,xml,jersey,json,ws \
 	-DdomainGroupId=org.mycompany.domain -DdomainArtifactId=mule-domain -DdomainVersion=1.0-SNAPSHOT
 
 Archetype Parameters:
@@ -65,10 +65,10 @@ Archetype Parameters:
 |archetypeGroupId|The group Id of the archetype| This value must ALWAYS by org.mule.tools.maven||
 |archetypeArtifactId|The artifact Id of the archetype| This value must ALWAYS mule-archetype-project||
 |archetypeVersion|The version of the archetype. This value can change as we release new versions of the archetype. Always use the latest non-SNAPSHOT version available.||
-|groupId|The group Id of the application you are creating. A good value would be the reserve name of your company domain name, like: com.mycompany.app or org.mycompany.app||
+|groupId|The group Id of the application you are creating. A good value would be the reverse name of your company domain name, like: com.mycompany.app or org.mycompany.app||
 |artifactId|The artifact Id of the application you are creating. ||
 |version|The version of your application. Usually 1.0-SNAPSHOT.|1.0-SNAPSHOT|
-|muleVersion|The version of the mule runtime you are going to use. Mule 2.2.x is no longer supported|3.5.0|
+|muleVersion|The version of the mule runtime you are going to use. Mule 2.2.x is no longer supported|3.7.0|
 |transports|A comma separated list of the transport you are going to use within your application.|http,jms,vm,file,ftp |
 |modules|A comma separated list of the modules you are going to use within your application. |db,xml,jersey,json,ws |
 |EE|A flag to import the EE counterpart of the transports/modules you are using. |false |
@@ -83,8 +83,8 @@ A mule application can belong to a domain group. The domain allows sharing of re
 
 To create a domain execute:
 
-     mvn archetype:generate -DarchetypeGroupId=org.mule.tools.maven -DarchetypeArtifactId=maven-achetype-mule-domain \
-	-DarchetypeVersion=1.0 -DgroupId=org.mycompany.domain -DartifactId=mule-domain -Dversion=1.0-SNAPSHOT \
+     mvn archetype:generate -DarchetypeGroupId=org.mule.tools.maven -DarchetypeArtifactId=maven-archetype-mule-domain \
+	-DarchetypeVersion=1.1 -DgroupId=org.mycompany.domain -DartifactId=mule-domain -Dversion=1.0-SNAPSHOT \
 	-Dpackage=org.mycompany.domain
 
 Archetype Parameters:
@@ -92,11 +92,11 @@ Archetype Parameters:
 |parameter|description|default|
 |:--------|:----------|:----------|
 |archetypeGroupId|The group Id of the archetype| This value must ALWAYS by org.mule.tools.maven||
-|archetypeArtifactId|The artifact Id of the archetype| This value must ALWAYS by maven-achetype-mule-domain||
+|archetypeArtifactId|The artifact Id of the archetype| This value must ALWAYS by maven-archetype-mule-domain||
 |archetypeVersion|The version of the archetype. This value can change as we release new versions of the archetype. Always use the latest non-SNAPSHOT version available.||
-|groupId|The group Id of the domain you are creating. A good value would be the reserve name of your company domain name, like: com.mycompanny.domain or org.mycompany.domain||
+|groupId|The group Id of the domain you are creating. A good value would be the reverse name of your company domain name, like: com.mycompany.domain or org.mycompany.domain||
 |artifactId|The artifact Id of the domain you are creating. ||
-|version|The version of your application. Usually 1.0-SNAPSHOT. Your domain name, when depoyed to mule, will be artifactId-version|1.0-SNAPSHOT|
+|version|The version of your application. Usually 1.0-SNAPSHOT. Your domain name, when deployed to mule, will be artifactId-version|1.0-SNAPSHOT|
 |EE|A flag to import the EE counterpart of the domain namespace. |false |
 
 
@@ -108,8 +108,8 @@ the domain in a single project.
 
 To create a maven project with the domain and all the applications that will be deployed using that domain you can use the mule domain bundle archetype:
 
-     mvn archetype:generate -DarchetypeGroupId=org.mule.tools.maven -DarchetypeArtifactId=maven-achetype-mule-domain-bundle \
-	-DarchetypeVersion=1.0 -DgroupId=com.mycompany -DartifactId=mule-project -Dversion=1.0-SNAPSHOT \
+     mvn archetype:generate -DarchetypeGroupId=org.mule.tools.maven -DarchetypeArtifactId=maven-archetype-mule-domain-bundle \
+	-DarchetypeVersion=1.1 -DgroupId=com.mycompany -DartifactId=mule-project -Dversion=1.0-SNAPSHOT \
 	-Dpackage=com.mycompany
 
 This command will create a maven multi-module project with the following modules:
@@ -119,17 +119,17 @@ This command will create a maven multi-module project with the following modules
 
  If you're using the EE distribution, you should add the EE flag:
 
-     mvn archetype:generate -DarchetypeGroupId=org.mule.tools.maven -DarchetypeArtifactId=maven-achetype-mule-domain-bundle \
-	-DarchetypeVersion=1.1-SNAPSHOT -DgroupId=com.mycompany -DartifactId=mule-project -Dversion=1.0-SNAPSHOT \
+     mvn archetype:generate -DarchetypeGroupId=org.mule.tools.maven -DarchetypeArtifactId=maven-archetype-mule-domain-bundle \
+	-DarchetypeVersion=1.1 -DgroupId=com.mycompany -DartifactId=mule-project -Dversion=1.0-SNAPSHOT \
 	-Dpackage=com.mycompany -DEE=true
 
 
  |parameter|description|default|
  |:--------|:----------|:----------|
  |archetypeGroupId|The group Id of the archetype| This value must ALWAYS by org.mule.tools.maven||
- |archetypeArtifactId|The artifact Id of the archetype| This value must ALWAYS by maven-achetype-mule-domain-bundle||
+ |archetypeArtifactId|The artifact Id of the archetype| This value must ALWAYS by maven-archetype-mule-domain-bundle||
  |archetypeVersion|The version of the archetype. This value can change as we release new versions of the archetype. Always use the latest non-SNAPSHOT version available.||
- |groupId|The group Id of the domain bundle project you are creating. A good value would be the reserve name of your company domain name, like: com.mycompany or org.mycompany||
+ |groupId|The group Id of the domain bundle project you are creating. A good value would be the reverse name of your company domain name, like: com.mycompany or org.mycompany||
  |artifactId|The artifact Id of the domain bundle you are creating. Try to not include the domain word in it. ||
  |version|The version of your domain bundle. Usually 1.0-SNAPSHOT. Your domain name, when deployed to mule, will be artifactId-version|1.0-SNAPSHOT|
  |package|Required by maven archetype but not used. ||

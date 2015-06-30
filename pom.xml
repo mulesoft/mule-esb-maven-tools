@@ -4,7 +4,7 @@
 
     <name>Mule ESB Maven Tools</name>
     <description>
-        Maven tools for working with mule artifact (Mule Applications and Mule Domains).
+        Maven tools for working with mule artifacts (Mule Applications and Mule Domains).
     </description>
     <url>http://github.com/mulesoft/mule-esb-maven-tools</url>
     <inceptionYear>2014</inceptionYear>
@@ -17,7 +17,7 @@
 
     <organization>
         <name>MuleSoft, Inc.</name>
-        <url>http://www.mulesoft.com</url>
+        <url>https://www.mulesoft.com</url>
     </organization>
 
     <mailingLists>
@@ -69,13 +69,17 @@
             <name>Marcos Nunez Cortes</name>
         </developer>
         <developer>
-            <id>vromero</id>
-            <name>Victor Romero</name>
-        </developer>
-        <developer>
             <id>asequeira</id>
             <name>Alejandro Sequeira</name>
         </developer>
+		<developer>
+            <id>aiannucci</id>
+            <name>Alejandro Iannucci</name>
+		</developer>
+		<developer>
+            <id>anosenzo</id>
+            <name>Alejandro Nosenzo</name>
+		</developer>
     </developers>
 
     <groupId>org.mule.tools.maven</groupId>
@@ -86,7 +90,7 @@
     <properties>
         <jdk.version>1.7</jdk.version>
         <license.path>LICENSE_HEADER</license.path>
-        <mule.version>3.5.0</mule.version>
+        <mule.version>3.7.0-SNAPSHOT</mule.version>
         <skipGpg>true</skipGpg>
     </properties>
 
@@ -102,7 +106,7 @@
         <developerConnection>
             scm:git:git@github.com:mulesoft/mule-esb-maven-tools.git
         </developerConnection>
-        <url>http://github.com/mulesoft/mule-esb-maven-tools</url>
+        <url>https://github.com/mulesoft/mule-esb-maven-tools</url>
     </scm>
 
     <build>
@@ -147,7 +151,7 @@
                                     <version>[3.0.0,)</version>
                                 </requireMavenVersion>
                                 <requireJavaVersion>
-                                    <version>[1.6.0,)</version>
+                                    <version>[1.7.0,1.8.0)</version>
                                 </requireJavaVersion>
                             </rules>
                         </configuration>
@@ -270,7 +274,7 @@
             <dependency>
                 <groupId>org.mule.tools</groupId>
                 <artifactId>mule-artifact-archiver</artifactId>
-                <version>1.1-SNAPSHOT</version>
+                <version>1.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

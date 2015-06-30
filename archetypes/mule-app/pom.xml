@@ -6,7 +6,7 @@
         <artifactId>mule-esb-maven-archetypes</artifactId>
         <version>1.1-SNAPSHOT</version>
     </parent>
-    <artifactId>maven-achetype-mule-app</artifactId>
+    <artifactId>maven-archetype-mule-app</artifactId>
     <name>Mule ESB Maven App Archetype</name>
     <description>A simple maven tool to create mule applications</description>
     <packaging>maven-archetype</packaging>

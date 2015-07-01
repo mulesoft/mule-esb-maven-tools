@@ -90,7 +90,7 @@
     <properties>
         <jdk.version>1.7</jdk.version>
         <license.path>LICENSE_HEADER</license.path>
-        <mule.version>3.7.0-SNAPSHOT</mule.version>
+        <mule.version>3.7.0</mule.version>
         <skipGpg>true</skipGpg>
     </properties>
 

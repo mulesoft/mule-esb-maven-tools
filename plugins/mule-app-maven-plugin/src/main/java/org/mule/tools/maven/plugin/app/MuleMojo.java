@@ -10,19 +10,17 @@
 
 package org.mule.tools.maven.plugin.app;
 
+import org.apache.maven.artifact.Artifact;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
+import org.codehaus.plexus.archiver.ArchiverException;
+import org.codehaus.plexus.archiver.jar.JarArchiver;
 import org.mule.tools.artifact.archiver.api.MuleApplicationArchiveBuilder;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
-
-import org.apache.maven.artifact.Artifact;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.project.MavenProjectHelper;
-import org.codehaus.plexus.archiver.ArchiverException;
-import org.codehaus.plexus.archiver.jar.JarArchiver;
 
 /**
  * Build a Mule application archive.
@@ -34,11 +32,6 @@ import org.codehaus.plexus.archiver.jar.JarArchiver;
 public class MuleMojo extends AbstractMuleMojo
 {
     public final static String LIB_LOCATION = "lib" + File.separator;
-
-    /**
-     * @component
-     */
-    private MavenProjectHelper projectHelper;
 
     /**
      * Directory containing the classes.
@@ -101,7 +94,7 @@ public class MuleMojo extends AbstractMuleMojo
             throw new MojoExecutionException("Exception creating the Mule App", e);
         }
 
-        this.projectHelper.attachArtifact(this.project, "zip", app);
+        this.project.getArtifact().setFile(app);
     }
 
     protected void createMuleApp(final File app) throws MojoExecutionException, ArchiverException

@@ -14,6 +14,11 @@ import org.mule.tools.artifact.archiver.api.MuleApplicationArchiveBuilder;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileVisitResult;
+import java.nio.file.FileVisitor;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.List;
 import java.util.Set;
 
@@ -110,14 +115,14 @@ public class MuleMojo extends AbstractMuleMojo
 
         final MuleApplicationArchiveBuilder muleApplicationArchiveBuilder = new MuleApplicationArchiveBuilder();
 
-        addAppDirectory(muleApplicationArchiveBuilder);
-        addCompiledClasses(muleApplicationArchiveBuilder);
-        addDependencies(muleApplicationArchiveBuilder);
-        addMappingsDirectory(muleApplicationArchiveBuilder);
-        muleApplicationArchiveBuilder.setDestinationFile(app);
-
         try
         {
+            addAppDirectory(muleApplicationArchiveBuilder);
+            addCompiledClasses(muleApplicationArchiveBuilder);
+            addDependencies(muleApplicationArchiveBuilder);
+            addMappingsDirectory(muleApplicationArchiveBuilder);
+            muleApplicationArchiveBuilder.setDestinationFile(app);
+
             app.delete();
             muleApplicationArchiveBuilder.createDeployableFile();
         }
@@ -142,19 +147,46 @@ public class MuleMojo extends AbstractMuleMojo
         }
     }
 
-    private void addAppDirectory(MuleApplicationArchiveBuilder muleApplicationArchiveBuilder) throws ArchiverException
+    private void addAppDirectory(final MuleApplicationArchiveBuilder muleApplicationArchiveBuilder) throws ArchiverException, IOException
     {
+        FileVisitor excludeFromClassesFolderFileVisitor = new FileVisitor<Path>()
+        {
+            @Override
+            public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException
+            {
+                return FileVisitResult.CONTINUE;
+            }
+
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException
+            {
+                muleApplicationArchiveBuilder.excludeFromClassesFolder(file.toFile());
+                return FileVisitResult.CONTINUE;
+            }
+
+            @Override
+            public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException
+            {
+                return FileVisitResult.CONTINUE;
+            }
+
+            @Override
+            public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException
+            {
+                muleApplicationArchiveBuilder.excludeFromClassesFolder(dir.toFile());
+                return FileVisitResult.CONTINUE;
+            }
+        };
+
         if (filterAppDirectory)
         {
-            muleApplicationArchiveBuilder.setAppResourceFolder(getFilteredAppDirectory());
-            final File[] files = getFilteredAppDirectory().listFiles();
-            muleApplicationArchiveBuilder.excludeFromClassesFolder(files);
+            muleApplicationArchiveBuilder.addRootResourcesFile(getFilteredAppDirectory());
+            Files.walkFileTree(getFilteredAppDirectory().toPath(), excludeFromClassesFolderFileVisitor);
         }
         else
         {
-            muleApplicationArchiveBuilder.setAppResourceFolder(appDirectory);
-            final File[] files = appDirectory.listFiles();
-            muleApplicationArchiveBuilder.excludeFromClassesFolder(files);
+            muleApplicationArchiveBuilder.addRootResourcesFile(appDirectory);
+            Files.walkFileTree(appDirectory.toPath(), excludeFromClassesFolderFileVisitor);
         }
     }
 

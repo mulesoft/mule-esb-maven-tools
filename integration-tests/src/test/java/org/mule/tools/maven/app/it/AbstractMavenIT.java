@@ -170,4 +170,27 @@ public abstract class AbstractMavenIT {
         }
     }
 
+    protected void assertZipDoesContain(File file, String... filenames) throws IOException
+    {
+        ZipFile zipFile = null;
+        try
+        {
+            zipFile = new ZipFile(file);
+            for (String name :filenames)
+            {
+                if (zipFile.getEntry(name) == null)
+                {
+                    fail(file.getAbsolutePath() + " does not contain valid entry " + name);
+                }
+            }
+        }
+        finally
+        {
+            if (zipFile != null)
+            {
+                zipFile.close();
+            }
+        }
+    }
+
 }

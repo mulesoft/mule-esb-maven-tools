@@ -45,6 +45,14 @@ public abstract class AbstractMuleMojo extends AbstractMojo
     protected File appDirectory;
 
     /**
+     * Directory containing the api resources.
+     *
+     * @parameter expression="${basedir}/src/main/api"
+     * @required
+     */
+    protected File apiDirectory;
+
+    /**
      * The Maven project.
      *
      * @parameter expression="${project}"

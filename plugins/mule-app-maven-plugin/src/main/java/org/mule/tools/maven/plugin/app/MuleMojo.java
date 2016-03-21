@@ -119,6 +119,7 @@ public class MuleMojo extends AbstractMuleMojo
         {
             addAppDirectory(muleApplicationArchiveBuilder);
             addCompiledClasses(muleApplicationArchiveBuilder);
+            addApiFiles(muleApplicationArchiveBuilder);
             addDependencies(muleApplicationArchiveBuilder);
             addMappingsDirectory(muleApplicationArchiveBuilder);
             muleApplicationArchiveBuilder.setDestinationFile(app);
@@ -132,12 +133,25 @@ public class MuleMojo extends AbstractMuleMojo
         }
     }
 
+    private void addApiFiles(MuleApplicationArchiveBuilder muleApplicationArchiveBuilder)
+    {
+        if (this.apiDirectory.exists())
+        {
+            getLog().info("Copying api directly");
+            muleApplicationArchiveBuilder.addExtraResourceFolder(this.apiDirectory, "api");
+        }
+        else
+        {
+            getLog().info(this.apiDirectory + " does not exist, skipping");
+        }
+    }
+
     private void validateProject() throws MojoExecutionException
     {
         File muleConfig = new File(appDirectory, "mule-config.xml");
         File deploymentDescriptor = new File(appDirectory, "mule-deploy.properties");
 
-        if ((muleConfig.exists() == false) && (deploymentDescriptor.exists() == false))
+        if (!muleConfig.exists() && !deploymentDescriptor.exists())
         {
             String message = String.format("No mule-config.xml or mule-deploy.properties in %1s",
                 this.project.getBasedir());
@@ -192,7 +206,7 @@ public class MuleMojo extends AbstractMuleMojo
 
     private void addCompiledClasses(MuleApplicationArchiveBuilder muleApplicationArchiveBuilder) throws ArchiverException, MojoExecutionException
     {
-        if (this.archiveClasses == false)
+        if (!this.archiveClasses)
         {
             addClassesFolder(muleApplicationArchiveBuilder);
         }
@@ -230,7 +244,7 @@ public class MuleMojo extends AbstractMuleMojo
 
     private void addArchivedClasses(MuleApplicationArchiveBuilder muleApplicationArchiveBuilder) throws ArchiverException, MojoExecutionException
     {
-        if (this.classesDirectory.exists() == false)
+        if (!this.classesDirectory.exists())
         {
             getLog().info(this.classesDirectory + " does not exist, skipping");
             return;

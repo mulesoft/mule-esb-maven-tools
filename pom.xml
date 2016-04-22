@@ -10,8 +10,8 @@
     <inceptionYear>2014</inceptionYear>
     <licenses>
         <license>
-            <name>Apache License v2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <name>CPAL v1.0</name>
+            <url>http://www.mulesoft.com/CPAL</url>
         </license>
     </licenses>
 

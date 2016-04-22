@@ -138,11 +138,27 @@ public class MuleMojo extends AbstractMuleMojo
         if (this.apiDirectory.exists())
         {
             getLog().info("Copying api directly");
-            muleApplicationArchiveBuilder.addExtraResourceFolder(this.apiDirectory, "api");
+            addRecursively(this.apiDirectory, muleApplicationArchiveBuilder, "api");
         }
         else
         {
             getLog().info(this.apiDirectory + " does not exist, skipping");
+        }
+    }
+
+    private void addRecursively(File directory, MuleApplicationArchiveBuilder muleApplicationArchiveBuilder, String path)
+    {
+        muleApplicationArchiveBuilder.addExtraResourceFolder(directory, path);
+
+        if(directory != null && directory.listFiles() != null)
+        {
+            for(File file : directory.listFiles())
+            {
+                if(file.isDirectory())
+                {
+                    addRecursively(file, muleApplicationArchiveBuilder, path + "/" + file.getName());
+                }
+            }
         }
     }
 

@@ -38,6 +38,9 @@ public class PackageWithApiFolderIT extends AbstractMavenIT {
     protected void verify() throws Exception {
         File zipFile = zipFileFromBuildingProject();
         assertZipDoesContain(zipFile, "api/api.raml");
+        assertZipDoesContain(zipFile, "api/examples/example.json");
+        assertZipDoesContain(zipFile, "api/examples/more-examples/second-example.json");
+        assertZipDoesContain(zipFile, "api/schemas/schemas.json");
     }
 }
 

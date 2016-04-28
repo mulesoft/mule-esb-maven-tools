@@ -18,7 +18,7 @@
                 <!-- used to package the domain bundle artifact -->
                 <groupId>org.mule.tools.maven</groupId>
                 <artifactId>mule-domain-maven-plugin</artifactId>
-                <version>1.2-SNAPSHOT</version>
+                <version>1.2</version>
                 <extensions>true</extensions>
                 <configuration>
                     <copyToDomainsDirectory>true</copyToDomainsDirectory>

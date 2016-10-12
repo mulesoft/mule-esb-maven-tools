@@ -85,7 +85,6 @@ public class MuleDomainMojo extends AbstractMuleMojo
         }
 
         this.projectHelper.attachArtifact(this.project, "zip", domain);
-        this.project.getArtifact().setFile(domain);
     }
 
     protected Logger createLogger()

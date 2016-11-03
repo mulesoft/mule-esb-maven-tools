@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.mule.tools.maven</groupId>
         <artifactId>mule-esb-maven-archetypes</artifactId>
-        <version>1.3-SNAPSHOT</version>
+        <version>1.3</version>
     </parent>
     <artifactId>maven-archetype-mule-app</artifactId>
     <name>Mule ESB Maven App Archetype</name>

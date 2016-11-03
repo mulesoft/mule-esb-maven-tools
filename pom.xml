@@ -92,6 +92,7 @@
         <license.path>LICENSE_HEADER</license.path>
         <mule.version>3.7.0</mule.version>
         <skipGpg>true</skipGpg>
+        <mule.artifact.archiver.version>1.2-SNAPSHOT</mule.artifact.archiver.version>
     </properties>
 
     <modules>
@@ -274,7 +275,7 @@
             <dependency>
                 <groupId>org.mule.tools</groupId>
                 <artifactId>mule-artifact-archiver</artifactId>
-                <version>1.2-SNAPSHOT</version>
+                <version>${mule.artifact.archiver.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

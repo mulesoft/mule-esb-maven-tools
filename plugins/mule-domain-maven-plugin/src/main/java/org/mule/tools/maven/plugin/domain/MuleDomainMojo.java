@@ -216,7 +216,7 @@ public class MuleDomainMojo extends AbstractMuleMojo
             File[] directories = appsFolder.listFiles();
             for (File file : directories)
             {
-                if (file.isDirectory())
+                if (file.isDirectory() && !file.isHidden())
                 {
                     File targetFolder = new File(file, "target");
                     if (!targetFolder.exists())

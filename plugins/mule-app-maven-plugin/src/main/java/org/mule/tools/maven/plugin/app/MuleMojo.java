@@ -65,7 +65,6 @@ public class MuleMojo extends AbstractMuleMojo
     /**
      * List of exclusion elements (having groupId and artifactId children) to exclude from the
      * application archive.
-     *
      * @parameter
      * @since 1.2
      */
@@ -228,7 +227,11 @@ public class MuleMojo extends AbstractMuleMojo
         }
         else
         {
-            addArchivedClasses(muleApplicationArchiveBuilder);
+            File jar = addArchivedClasses(muleApplicationArchiveBuilder);
+            if(jar != null)
+            {
+            	this.projectHelper.attachArtifact(this.project, "jar", jar);
+            }
         }
     }
 
@@ -258,12 +261,12 @@ public class MuleMojo extends AbstractMuleMojo
         }
     }
 
-    private void addArchivedClasses(MuleApplicationArchiveBuilder muleApplicationArchiveBuilder) throws ArchiverException, MojoExecutionException
+    private File addArchivedClasses(MuleApplicationArchiveBuilder muleApplicationArchiveBuilder) throws ArchiverException, MojoExecutionException
     {
         if (!this.classesDirectory.exists())
         {
             getLog().info(this.classesDirectory + " does not exist, skipping");
-            return;
+            return null;
         }
 
         getLog().info("Copying classes as a jar");
@@ -283,6 +286,8 @@ public class MuleMojo extends AbstractMuleMojo
             getLog().error(message, e);
             throw new MojoExecutionException(message, e);
         }
+		
+		return jar;
     }
 
     private void addDependencies(MuleApplicationArchiveBuilder muleApplicationArchiveBuilder) throws ArchiverException

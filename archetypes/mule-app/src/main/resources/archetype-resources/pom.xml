@@ -16,7 +16,7 @@
 		<mule.version>${muleVersion}</mule.version>
         <mule.tools.version>@project.version@</mule.tools.version>
 		<jdk.version>1.7</jdk.version>
-		<junit.version>4.9</junit.version>
+		<junit.version>4.12</junit.version>
 #if(${domainGroupId} != 'empty')
         <domainGroupId>${domainGroupId}</domainGroupId>
         <domainArtifactId>${domainArtifactId}</domainArtifactId>
@@ -57,6 +57,9 @@
 								<resource>
 									<directory>src/main/app/</directory>
 								</resource>
+								<resource>
+									<directory>src/main/api/</directory>
+								</resource>								
 							</resources>
 						</configuration>
 					</execution>

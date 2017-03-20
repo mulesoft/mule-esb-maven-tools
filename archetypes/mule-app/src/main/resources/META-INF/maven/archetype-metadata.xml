@@ -6,13 +6,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<requiredProperties>
 		<requiredProperty key="transports">
-			<defaultValue>http,jms,vm,file,ftp</defaultValue>
+			<defaultValue>http,jms,vm,file</defaultValue>
 		</requiredProperty>
 		<requiredProperty key="modules">
-			<defaultValue>db,xml,jersey,json,ws</defaultValue>
+			<defaultValue>db,xml,scripting,json,ws</defaultValue>
 		</requiredProperty>
 		<requiredProperty key="muleVersion">
-			<defaultValue>3.7.0</defaultValue>
+			<defaultValue>3.8.0</defaultValue>
 		</requiredProperty>
 		<requiredProperty key="EE">
 			<defaultValue>false</defaultValue>
@@ -36,6 +36,12 @@
 			<includes>
 				<include>**/*.xml</include>
                 <include>**/*.properties</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" encoding="UTF-8">
+			<directory>src/main/api</directory>
+			<includes>
+				<include>**/*.raml</include>
 			</includes>
 		</fileSet>
 		<fileSet filtered="true" packaged="true" encoding="UTF-8">

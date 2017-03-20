@@ -15,7 +15,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<mule.version>${muleVersion}</mule.version>
         <mule.tools.version>@project.version@</mule.tools.version>
-		<jdk.version>1.8</jdk.version>
+		<jdk.version>1.7</jdk.version>
 		<junit.version>4.12</junit.version>
 #if(${domainGroupId} != 'empty')
         <domainGroupId>${domainGroupId}</domainGroupId>

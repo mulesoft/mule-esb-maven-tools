@@ -84,7 +84,7 @@ public class MuleDomainMojo extends AbstractMuleMojo
             throw new MojoExecutionException("Exception creating the Mule App", e);
         }
 
-        this.projectHelper.attachArtifact(this.project, "zip", domain);
+        this.project.getArtifact().setFile(domain);
     }
 
     protected Logger createLogger()

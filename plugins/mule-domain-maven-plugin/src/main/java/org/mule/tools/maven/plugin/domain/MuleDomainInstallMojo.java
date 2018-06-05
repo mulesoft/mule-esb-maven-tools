@@ -15,10 +15,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.codehaus.plexus.util.IOUtil;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 /**
  * @goal install
@@ -133,16 +136,20 @@ public class MuleDomainInstallMojo extends AbstractMuleMojo
         File domainsDirectory = muleDomainsDirectory(muleHome);
         File targetFile = new File(domainsDirectory, finalName + ".zip");
 
-        if (sourceFile.renameTo(targetFile) == false)
-        {
-            String message = String.format("Could not rename %1s to %2s",
-                sourceFile.getAbsolutePath(), targetFile.getAbsolutePath());
-            throw new MojoExecutionException(message);
-        }
+        renameFile(sourceFile, targetFile);
 
         String message = String.format("Renaming %1s to %2s", sourceFile.getAbsolutePath(),
             targetFile.getAbsolutePath());
         getLog().info(message);
+    }
+
+    public void renameFile(File orig, File dest) throws MojoExecutionException {
+        try {
+            Files.move(orig.toPath(), dest.toPath(), REPLACE_EXISTING);
+        } catch (IOException e) {
+            throw new MojoExecutionException(String.format("Could not rename %1s to %2s",
+                    orig.getAbsolutePath(), dest.getAbsolutePath()), e);
+        }
     }
 
     private File tempFileInDomainsDirectory(File muleHome)

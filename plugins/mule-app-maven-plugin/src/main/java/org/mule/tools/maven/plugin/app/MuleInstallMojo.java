@@ -16,12 +16,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.Set;
 
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.codehaus.plexus.util.IOUtil;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 /**
  * @goal install
@@ -180,16 +183,22 @@ public class MuleInstallMojo extends AbstractMuleMojo
                                         tempFile.getAbsolutePath()));
 
             File finalFile = new File(dest, zipFile.getName());
-            if (tempFile.renameTo(finalFile) == false)
-            {
-                throw new MojoExecutionException(String.format("Could not rename %1s to %2s",
-                                                               tempFile.getAbsolutePath(), finalFile.getAbsolutePath()));
-            }
+            renameFile(tempFile, finalFile);
+
         }
         finally
         {
             IOUtil.close(muleZipInput);
             IOUtil.close(tempOutput);
+        }
+    }
+
+    public void renameFile(File orig, File dest) throws MojoExecutionException {
+        try {
+            Files.move(orig.toPath(), dest.toPath(), REPLACE_EXISTING);
+        } catch (IOException e) {
+            throw new MojoExecutionException(String.format("Could not rename %1s to %2s",
+                    orig.getAbsolutePath(), dest.getAbsolutePath()), e);
         }
     }
 

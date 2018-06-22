@@ -23,7 +23,7 @@
     <mailingLists>
         <mailingList>
             <name>developers</name>
-            <post>mule-esb@mulesoft.com</post>
+            <post>munit@mulesoft.com</post>
         </mailingList>
     </mailingLists>
 
@@ -88,7 +88,7 @@
 
     <groupId>org.mule.tools.maven</groupId>
     <artifactId>mule-esb-maven-tools</artifactId>
-    <version>1.4-SNAPSHOT</version>
+    <version>1.4</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -96,8 +96,8 @@
         <license.path>LICENSE_HEADER</license.path>
         <mule.version>3.8.0</mule.version>
         <skipGpg>true</skipGpg>
-        <mule.artifact.archiver.version>1.2-SNAPSHOT</mule.artifact.archiver.version>
-        <app.version>1.5-SNAPSHOT</app.version>
+        <mule.artifact.archiver.version>1.2</mule.artifact.archiver.version>
+        <app.version>1.5</app.version>
     </properties>
 
     <modules>

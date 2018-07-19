@@ -53,6 +53,14 @@ public abstract class AbstractMuleMojo extends AbstractMojo
     protected File apiDirectory;
 
     /**
+     * Directory containing the exported project.
+     *
+     * @parameter expression="${basedir}/target/META-INF"
+     * @required
+     */
+    protected File metaInfDirectory;
+
+    /**
      * The Maven project.
      *
      * @parameter expression="${project}"

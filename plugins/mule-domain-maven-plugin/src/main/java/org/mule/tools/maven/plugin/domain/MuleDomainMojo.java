@@ -196,6 +196,8 @@ public class MuleDomainMojo extends AbstractMuleMojo
         addResourcesFile(archiver);
         addDomainFile(archiver);
         //addMappingsDirectory(archiver);
+        addMetaInfDirectory(archiver);
+
         archiver.setDestFile(domain);
 
         try
@@ -206,6 +208,21 @@ public class MuleDomainMojo extends AbstractMuleMojo
         catch (IOException e)
         {
             getLog().error("Cannot create archive", e);
+        }
+    }
+
+    private void addMetaInfDirectory(MuleArchiver archiver) throws MojoExecutionException {
+        if (this.metaInfDirectory.exists()) {
+            getLog().info("Copying META-INF directly");
+            try {
+                archiver.addDirectory(this.metaInfDirectory, "META-INF/", null, null);
+            } catch (ArchiverException e) {
+                throw new MojoExecutionException("Error adding META-INF " + metaInfDirectory.getName(),e);
+            }
+        }
+        else
+        {
+            getLog().info(this.metaInfDirectory + " does not exist, skipping");
         }
     }
 
@@ -293,4 +310,6 @@ public class MuleDomainMojo extends AbstractMuleMojo
             this.exclusions, this.excludeMuleDependencies);
         return filter.getArtifactsToArchive();
     }
+
+
 }

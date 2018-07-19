@@ -76,6 +76,14 @@ public abstract class AbstractMuleMojo extends AbstractMojo
      */
     protected MavenProject project;
 
+    /**
+     * Directory containing the exported project.
+     *
+     * @parameter expression="${basedir}/target/META-INF"
+     * @required
+     */
+    protected File metaInfDirectory;
+
     protected File getMuleZipFile()
     {
         return new File(this.outputDirectory, this.finalName + ".zip");

@@ -122,7 +122,9 @@ public class MuleMojo extends AbstractMuleMojo
             addApiFiles(muleApplicationArchiveBuilder);
             addDependencies(muleApplicationArchiveBuilder);
             addMappingsDirectory(muleApplicationArchiveBuilder);
+            addMetaInfDirectory(muleApplicationArchiveBuilder);
             muleApplicationArchiveBuilder.setDestinationFile(app);
+
 
             app.delete();
             muleApplicationArchiveBuilder.createDeployableFile();
@@ -130,6 +132,17 @@ public class MuleMojo extends AbstractMuleMojo
         catch (IOException e)
         {
             getLog().error("Cannot create archive", e);
+        }
+    }
+
+    private void addMetaInfDirectory(MuleApplicationArchiveBuilder muleApplicationArchiveBuilder) {
+        if (this.metaInfDirectory.exists()) {
+            getLog().info("Copying META-INF directly");
+            addRecursively(this.metaInfDirectory, muleApplicationArchiveBuilder, "META-INF");
+        }
+        else
+        {
+            getLog().info(this.metaInfDirectory + " does not exist, skipping");
         }
     }
 

@@ -179,6 +179,8 @@ public class MuleInstallMojo extends AbstractMuleMojo
 
             IOUtil.copy(muleZipInput, tempOutput);
 
+            IOUtil.close(tempOutput);
+
             getLog().info(String.format("Copying %1s to %2s", zipFile.getAbsolutePath(),
                                         tempFile.getAbsolutePath()));
 
@@ -189,7 +191,6 @@ public class MuleInstallMojo extends AbstractMuleMojo
         finally
         {
             IOUtil.close(muleZipInput);
-            IOUtil.close(tempOutput);
         }
     }
 

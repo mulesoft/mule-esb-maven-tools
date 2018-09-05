@@ -190,6 +190,7 @@ public class MuleInstallMojo extends AbstractMuleMojo
         }
         finally
         {
+            IOUtil.close(tempOutput);
             IOUtil.close(muleZipInput);
         }
     }

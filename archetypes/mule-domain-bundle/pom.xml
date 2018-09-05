@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.mule.tools.maven</groupId>
         <artifactId>mule-esb-maven-archetypes</artifactId>
-        <version>1.4-SNAPSHOT</version>
+        <version>1.6-SNAPSHOT</version>
     </parent>
     <artifactId>maven-archetype-mule-domain-bundle</artifactId>
     <packaging>maven-archetype</packaging>

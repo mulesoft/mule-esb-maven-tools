@@ -33,11 +33,11 @@
                                 org.mule.tools.maven:mule-domain-maven-plugin:mule-domain
                             </package>
                             <install>
-                                org.apache.maven.plugins:maven-install-plugin:install,
+                                org.apache.maven.plugins:maven-install-plugin:2.5.2:install,
                                 org.mule.tools.maven:mule-domain-maven-plugin:install
                             </install>
                             <deploy>
-                                org.apache.maven.plugins:maven-deploy-plugin:deploy
+                                org.apache.maven.plugins:maven-deploy-plugin:2.8.2:deploy
                             </deploy>
                         </phases>
                     </lifecycle>

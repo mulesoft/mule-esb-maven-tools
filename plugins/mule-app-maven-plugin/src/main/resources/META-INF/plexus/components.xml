@@ -33,7 +33,7 @@
                                 org.mule.tools.maven:mule-app-maven-plugin:mule
                             </package>
                             <install>
-                                org.apache.maven.plugins:maven-install-plugin:install,
+                                org.apache.maven.plugins:maven-install-plugin:2.5.2:install,
                                 org.mule.tools.maven:mule-app-maven-plugin:install
                             </install>
                             <deploy>

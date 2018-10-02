@@ -96,8 +96,7 @@
         <license.path>LICENSE_HEADER</license.path>
         <mule.version>3.8.0</mule.version>
         <skipGpg>true</skipGpg>
-        <mule.artifact.archiver.version>1.2-SNAPSHOT</mule.artifact.archiver.version>
-        <app.version>1.5-SNAPSHOT</app.version>
+        <mule.artifact.archiver.version>1.1</mule.artifact.archiver.version>
     </properties>
 
     <modules>

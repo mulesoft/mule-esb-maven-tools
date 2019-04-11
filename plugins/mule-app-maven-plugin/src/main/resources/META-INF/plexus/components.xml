@@ -9,9 +9,6 @@
                     <lifecycle>
                         <id>default</id>
                         <phases>
-                            <validate>
-                                org.mule.tools.maven:mule-app-maven-plugin:attach-test-resources
-                            </validate>
                             <process-resources>
                                 org.apache.maven.plugins:maven-resources-plugin:resources,
                                 org.mule.tools.maven:mule-app-maven-plugin:filter-resources,

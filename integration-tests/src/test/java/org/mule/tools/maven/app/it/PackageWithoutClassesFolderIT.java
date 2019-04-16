@@ -13,7 +13,6 @@ package org.mule.tools.maven.app.it;
 import java.io.File;
 
 import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
 
 public class PackageWithoutClassesFolderIT extends AbstractMavenIT {
 

@@ -54,6 +54,7 @@
             <configuration>
                 <type>mule</type>
                 <language>java</language>
+                <extension>zip</extension>
                 <addedToClasspath>true</addedToClasspath>
             </configuration>
         </component>

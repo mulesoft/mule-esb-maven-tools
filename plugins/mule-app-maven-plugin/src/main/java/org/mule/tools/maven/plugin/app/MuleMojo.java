@@ -94,16 +94,25 @@ public class MuleMojo extends AbstractMuleMojo
      */
     private boolean filterAppDirectory;
 
+    /**
+     * Parameter used when deploying already built mule projects. Will skip the creation of a Mule deployable Zip file.
+     * Expects a deployable Mule Zip file exists in "${project.build.outputDirectory}".
+     * Default is <code>false</code>.
+     * @parameter expression="${skipCreateMuleApp}" default-value="false"
+     */
+    private boolean skipCreateMuleApp;
+
     public void execute() throws MojoExecutionException, MojoFailureException
     {
         File app = getMuleAppZipFile();
-        try
-        {
-            createMuleApp(app);
-        }
-        catch (ArchiverException e)
-        {
-            throw new MojoExecutionException("Exception creating the Mule App", e);
+        if(!skipCreateMuleApp) {
+            try {
+                createMuleApp(app);
+            } catch (ArchiverException e) {
+                throw new MojoExecutionException("Exception creating the Mule App", e);
+            }
+        }else{
+            getLog().info("Skipping Mule goal");
         }
 
         this.projectHelper.attachArtifact(this.project, "zip", app);
@@ -183,7 +192,7 @@ public class MuleMojo extends AbstractMuleMojo
         if (!muleConfig.exists() && !deploymentDescriptor.exists())
         {
             String message = String.format("No mule-config.xml or mule-deploy.properties in %1s",
-                this.project.getBasedir());
+                    this.project.getBasedir());
 
             getLog().error(message);
             throw new MojoExecutionException(message);
@@ -311,7 +320,7 @@ public class MuleMojo extends AbstractMuleMojo
     private Set<Artifact> getArtifactsToArchive()
     {
         ArtifactFilter filter = new ArtifactFilter(this.project, this.inclusions,
-            this.exclusions, this.excludeMuleDependencies);
+                this.exclusions, this.excludeMuleDependencies);
         return filter.getArtifactsToArchive();
     }
 }
